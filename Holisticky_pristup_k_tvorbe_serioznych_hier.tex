@@ -1,17 +1,14 @@
-% Metódy inžinierskej práce
-
 \documentclass[10pt,twoside,slovak,a4paper]{article}
 
 \usepackage[slovak]{babel}
-%\usepackage[T1]{fontenc}
-\usepackage[IL2]{fontenc} % lepšia sadzba písmena Ľ než v T1
+\usepackage[IL2]{fontenc}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
-\usepackage{url} % príkaz \url na formátovanie URL
-\usepackage{hyperref} % odkazy v texte budú aktívne (pri niektorých triedach dokumentov spôsobuje posun textu)
+\usepackage{url}
+\usepackage{hyperref}
 
 \usepackage{cite}
-%\usepackage{times}
+
 
 \pagestyle{headings}
 
@@ -32,93 +29,63 @@
 \maketitle
 
 \begin{abstract}
-\ldots
+Seriózne hry sú v akademickej či profesijnej sfére známe ako nástroje k odovzdávaniu vedomostí. Sú nazývané \emph{hrami}, pretože sú podobné bežným komerčným hrám v tom, že obsahujú aj element zábavy. Takto má teoreticky seriózna hra fungovať. V praxi to však vyzerá tak, že vo väčšine prípadov nastáva prevaha vzdelávacieho alebo zábavného elementu, čo je veľmi kontraproduktívne voči úmyslu hry. Z logického hľadiska by odpoveďou na tento problém bol vývoj hry, ktorá má oba elementy vyvážené. Preto je dôležitý vývin takej koncepcie herného dizajnu, ktorá by toto zabezpečovala.
 \end{abstract}
 
 
 
 \section{Úvod}
 
-Motivujte čitateľa a vysvetlite, o čom píšete. Úvod sa väčšinou nedelí na časti.
+Seriózne hry ako vedecký odbor je veľmi mladý. Všeobecne existuje konsenzus, že jeho otcom je Clark C Abt, ktorý tento pojem vymyslel v 1970 a popularizátorom Ben Saywer od roku 2002. \cite{wilkinson2016brief} Avšak hlavný koncept za týmto pojmom - \emph{hra, ktorej primárny účel nie je zábava} \cite{alvarez2011introduction} - je možné vystopovať do dávnej minulosti, už do čias Platóna, ktorý sa vo svojich úvahách zaoberal myšlienkou divadelných hier, ktoré by slúžili na účel poučenia a vzdelávania a naozaj, keď sa pozrieme na mnohé divadelné hry histórie, ako napríklad od Williama Shakesphearea, môžme aj v jeho komédiách nájsť mnoho poučného. Preto možno povedať, že táto myšlienka sprevádza ľudstvo v určitej podobe naprieč históriou. 
 
-Uveďte explicitne štruktúru článku. Tu je nejaký príklad.
-Základný problém, ktorý bol naznačený v úvode, je podrobnejšie vysvetlený v časti~\ref{nejaka}.
-Dôležité súvislosti sú uvedené v častiach~\ref{dolezita} a~\ref{dolezitejsia}.
-Záverečné poznámky prináša časť~\ref{zaver}.
+No napriek tomu, že táto myšlienka má korene už v dávnej minulosti a dnes sa jej rozvoju venuje celý vedný odbor, stále sa tvorcovia serióznych hier potýkajú s jedným závažným problémom. Hoci je celkom samozrejmé, že optimálna seriózna hra by mala byť navrhnutá a implementovaná tak, aby v rovnakej miere prinášala zábavu i ponaučenie a aby tieto 2 aspekty navzájom prirodzene koexistovali a boli zdanlivo nerozlíšiteľné, pri aplikácii do reality sa zväčša veľmi nedarí toto naplniť. Výsledkom sú hry, ktoré su príliš zamerané na zdieľanie kvanta informácií alebo, naopak, priorizujú zábavu a prinášajú málo vzdelania. Tento problém a jeho možné riešenie budú náplňou mojej práce.
 
+Problém, ktorý tento úvod predostiera bude rozšírenejšie vysvetlený v časti \ref{problem} .
+Analýza vedeckých faktov na riešenie daného problému bude v časti \ref{jadro} .
+Riešenie problému, ako ho prednáša štúdia \cite{natucci2021experience} a môj komentár k tomu v časti \ref{riesenie}  .
+Zhrnutie semestrálnej práce bude v časti \ref{zaver} .
 
+\section{Nedostatky serióznych hier} \label{problem}
+Aby bolo možné plne pochopiť tento problém, treba sa najprv pozrieť na definíciu serióznej hry a ako sa bežne odlišuje od bežnej hry. Hry komerčného typu slúžia všeobecne na zábavu a oddych a pri ich tvorbe sa toto berie ako primárny faktor, zatiaľ čo seriózny hry sa, ako sa už spomínalo, zameriavajú na akademické alebo profesijné prostredie a majú silný poučný charakter, zodpovedajúci ortodoxným koncepciám ich tvorby. Na dosiahnutie tohto cieľa využíva vedná disciplína serióznych hier teórie učenia, ktorá sa vyvýjali popri samotnom vzdelávacom systéme a akademickom prostredí, čím sa líši od komerčných hier. Herná teória, ktorá je tiež vedecky formulovaná a je extensívne popísaná napríklad tu \cite{owen2013game} sa totiž na ne priamo neodvoláva. Spôsob, akým seriózne hry využívajú rozličné teórie učenia a čím sa z teoretického hľadiska fundamentálne líšia od komerčných hier popisuje časť \ref{jadro:teorie} . 
 
-\section{Nejaká časť} \label{nejaka}
+Definície serióznych hier a hier komerčných teda predpokladajú, že zamýšľaný cieľ a praktický efekt na hráča sú rozdielne. No napriek tomu, že sa takto tieto dva typy hier odlišujú, tak po hlbšom preskúmaní je jasné, že existuje silné prekrytie medzi týmito dvomi sférami. Ako príklad sa dá uviesť napríklad strategická hra z obdobia neskorého stredoveku, renesancie a baroka Europa Universalis II, ktorá podľa \cite{egenfeldt2012europa} je excelentným nástrojom, ktorým možno učiť históriu tohto obdobia. Hra síce dáva hráčovi určitú voľnosť, ako reagovať na rôzne udalosti v hre, tie sú však generované s ohľadom na skutočnú históriu, schopnosti a efektívnosť jednotlivých panovníkov zodpovedajú historickej realite atď. EUII je teda nielen klasická komerčná hra, ale dokáže v podstate aj spĺňať rolu serióznej hry.
 
-Z obr.~\ref{f:rozhod} je všetko jasné. 
+Rovnako sa dá argumentovať, že niektoré seriózne hry sú v praktickom prevedení primárne zábavné a ich poučný charakter je silno zatienený. Z toho vyplýva, že mnoho komerčných hier (prinajmenšom všetky historicky orientované stategické hry a všetky realistické simulátory, napríklad letecké simulátory) majú vzdelávací potenciál (a v niektorých prípadoch boli použité aj presne na tieto účely), zatiaľ čo mnohé seriózne hry, ktoré boli pre tento účel vytvorené, zlyhávajú. Odpoveďou na to, prečo to tak je, by mohla byť napríklad táto definícia hier (komerčných): \emph{hra je aktivita riešiaca problém, ku ktorej sa pristupuje s hravým postojom} \cite{schell2008art}. Keďže vyriešenie daného problému vyžaduje pochopenie herných mechaník a systémov a aplikovanie tohto porozumenia, je možné pripustiť, že každá aspoň trochu komplikovane štruktúrovaná hra má implicitne za cieľ nejaké porozumenie/pochopenie a hráči ho hľadajú intuitívne. A keďže mnohé komerčné hry dokážu v tomto virtuálnom prostredí za daný cieľ stanoviť porozumenie/poučenie, ktoré má využitie v reálnom svete, tak práve tu by mohlo existovať riešenie základného problému serióznych hier - poskytnúť hráčovi dostatok zábavy a zároveň šikovne pripojiť edukatívne prvky do nich tak, aby ich chcel intuitívne zvládnuť, čím sa vytvorí motivácia a, ideálne, aj dlhodobý efekt na hráča. Ako a či vôbec berú toto do úvahy súčasné koncepcie dizajnu serióznych hier a aký to má z dlhodobého hľadiska účinok na participantov serióznych hier sa venuje \ref{jadro:vyvoj} .
 
-\begin{figure*}[tbh]
-\centering
-%\includegraphics[scale=1.0]{diagram.pdf}
-Aj text môže byť prezentovaný ako obrázok. Stane sa z neho označný plávajúci objekt. Po vytvorení diagramu zrušte znak \texttt{\%} pred príkazom \verb|\includegraphics| označte tento riadok ako komentár (tiež pomocou znaku \texttt{\%}).
-\caption{Rozhodujúci argument.}
-\label{f:rozhod}
-\end{figure*}
+\section{Teórie učenia a koncepcie herného vývoja} \label{jadro}
+Hoci pedagogické teórie zamerané na seriózne hry sú relatívne nové, čerpajú z bohatej histórie teórií a predstáv o učení a o tom, ako efektívne učiť a vzdelávať, keďže filozofia sa s týmto problémom potýkala už od čias Platóna a Aristotela. Mnohí veľkí myslitelia si totiž uvedomovali, že ovplyvnením mladej generácie ich doby môžu nepriamo vplývať na ďaľší chod a progres spoločnosti. V posledných stáročiach sa vyvinuly rôzne metodiky učenia, z ktorých, ako uvádza \cite{natucci2021experience}, sa vyvinuly teórie učenia spojené so serióznymi hrami.
 
+\subsection{Teórie učenia} \label{jadro:teorie}
+4 prístupy a chápania učenia relevantné pry vývoji serióznych hier:
 
+1. Konštruktivizmus - predpokladá, že subjekt, ktorý sa učí, je aktívny konštruktor informácií, teda učenie je priamo naviazané na predošlé poznatky a novoprijaté informácie sa posudzujú podľa predošle získaných vedomostí
 
-\section{Iná časť} \label{ina}
+2. Sociokonštruktivizmus - varianta konštruktivizmu, konštruktorom informácií sú sociálne štruktúry a interakcie, ktoré priamo ovplyvňujú subjekt učenia
 
-Základným problémom je teda\ldots{} Najprv sa pozrieme na nejaké vysvetlenie (časť~\ref{ina:nejake}), a potom na ešte nejaké (časť~\ref{ina:nejake}).\footnote{Niekedy môžete potrebovať aj poznámku pod čiarou.}
+3.  Kognitivizmus - nevyhnutnou súčasťou procesu učenia je premýšľanie a implikuje, že najefektívnejší spôsob pochopenia a uloženia informácie do pamäťa je štrukturalizácia obsahu učenia od jednoduchému ku komplexnému (uprednostňuje teda analytický prístup)
 
-Môže sa zdať, že problém vlastne nejestvuje\cite{Coplien:MPD}, ale bolo dokázané, že to tak nie je~\cite{Czarnecki:Staged, Czarnecki:Progress}. Napriek tomu, aj dnes na webe narazíme na všelijaké pochybné názory\cite{PLP-Framework}. Dôležité veci možno \emph{zdôrazniť kurzívou}.
+4. Humanizmus - predpokladá, že učenie je idnividuálne v zmysle, že okrem kognitívnych parametrov treba brať do úvahy osobné potreby a hodnoty jednotlivca - subjektu
 
+Tieto prístupy sa značne líšia, a preto sú rozličné aj koncepty učenia, ktoré predkladajú: ///neskôr///
 
-\subsection{Nejaké vysvetlenie} \label{ina:nejake}
+///neskôr///
 
-Niekedy treba uviesť zoznam:
+Logická analýza predpokladá, že optimálna koncepcia pre vývoj serióznej hry drží v rovnováhe zábavnú a poučnú zložku. Preto ďaľšia podsekcia \ref{jadro:vyvoj} prechádza súčasnými koncepciami dizajnu serióznych hier
+\subsection{Súčasné koncepcie herného vývoja} \label{jadro:vyvoj}
+///neskôr///
 
-\begin{itemize}
-\item jedna vec
-\item druhá vec
-	\begin{itemize}
-	\item x
-	\item y
-	\end{itemize}
-\end{itemize}
+\section{Predostrenie optimálnej koncepcie a štruktúry vývoja} \label{riesenie}
+///úvod do kapitoly sa naformuluje neskôr///
+Z predošlej analýzy už existujúcich koncepcií je očividné, že aj koncepcia optimalizovaná pre túto problematiku sa snaží dosiahnúť určitý, jasne vyhranený cieľ, ktorý presahuje hru samotnú. Ak by to nezvládla, zmyseľ jej existencie by nebol dosiahnutý. Hra preto musí byť štruktúrovaná okolo tohto cieľa, no musí byť aj koherentná a zároveň musí adekvátne implementovať zábavný element.
 
-Ten istý zoznam, len číslovaný:
+Tu však nastáva jeden problém. Vo sfére psychológie je dlhodobo známy fakt, že ľudia sú rozličný a veľmi individuálny. V tomto kontexte je jasné, že seriózna hra, akokoľvek dobre namodelovaná, nedokáže zaručiť prenos požadovaných informácií na každého hráča, rozhodne nie s rovnakým účinkom. Očakávať opak je nerealistické. Možno sa spoliehať len na to, že \emph{štruktúra hry ovplyvňuje priestor možnosti (preniesť vedomosť) samotnej hry} \cite{mitgutsch2012purposeful}.
 
-\begin{enumerate}
-\item jedna vec
-\item druhá vec
-	\begin{enumerate}
-	\item x
-	\item y
-	\end{enumerate}
-\end{enumerate}
+Popri tomto všetkom však treba myslieť aj na klasické prvky hier - herné mechaniky, grafický, postavy (pravdepodobne hra má hlavnú postavu ovládanú hráčom a vedľajšie postavy ovládané umelou inteligenciou), naratív, celková atmosféra, funkčnosť. Treba ich konštruovať tak, aby vyvolali v hráčovi pocit silnej imerzie do hry, pretože v takom prípade má hra silný dopad na podvedomie človeka a dokáže ho ovplyvňovať \cite{an2015subconscious}. Najsilnejšími aktérmi v tomto ohľade sú práve zvuk a obraz. Je všeobecne známe, že zvukový doprovod (angl. soundtrack sa používa častejšie) je veľmi dôležitou súčasťou každej hry - mnohé z populárnych (komerčných) hier vynikajú svojím soundtrackom. ///neskôr///
 
+\section{Zhrnutie} \label{zaver}
+Metodológiou predpísanou v úvode (pochopenie problému, analýza vedeckých faktov z relevantných oblastí, riešenie problému predostrené vedeckou štúdiou + môj komentár) som prišiel k týmto záverom:///neskôr///
 
-\subsection{Ešte nejaké vysvetlenie} \label{ina:este}
+\bibliographystyle{plain} 
+\bibliography{zdroje}
 
-\paragraph{Veľmi dôležitá poznámka.}
-Niekedy je potrebné nadpisom označiť odsek. Text pokračuje hneď za nadpisom.
-
-
-
-\section{Dôležitá časť} \label{dolezita}
-
-
-
-
-\section{Ešte dôležitejšia časť} \label{dolezitejsia}
-
-
-
-
-\section{Záver} \label{zaver} % prípadne iný variant názvu
-
-
-
-%\acknowledgement{Ak niekomu chcete poďakovať\ldots}
-
-
-% týmto sa generuje zoznam literatúry z obsahu súboru literatura.bib podľa toho, na čo sa v článku odkazujete
-\bibliography{literatura}
-\bibliographystyle{plain} % prípadne alpha, abbrv alebo hociktorý iný
 \end{document}
